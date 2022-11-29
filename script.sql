@@ -12,3 +12,5 @@ INSERT INTO prueba (nombre) VALUES ("Jorgito");
 INSERT INTO prueba (nombre) VALUES ("Juanito");
 INSERT INTO prueba (nombre) VALUES ("Anita");
 INSERT INTO prueba (nombre) VALUES ("Paulita");
+
+SELECT * FROM prueba;

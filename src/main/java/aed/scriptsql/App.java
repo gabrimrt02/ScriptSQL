@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import org.apache.commons.io.FilenameUtils;
 
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -68,7 +69,18 @@ public class App {
 
                 System.out.println("Comando: " + comando);
                 
-                conexion.ejecutar(comando);
+                // conexion.ejecutar(comando);
+
+                if (conexion.ejecutar(comando)) {
+                    
+                    ArrayList<String> resultado = conexion.getResultado(comando);
+
+                    for(String s : resultado) {
+                        System.out.println("** " + s);
+                    }
+
+                }
+
             }
 
             sc.close();
@@ -79,7 +91,6 @@ public class App {
         } catch (NoSuchElementException e) {
             // No hace nada para no lanzar errores en la consola
         } catch (ClassNotFoundException | IOException | SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
