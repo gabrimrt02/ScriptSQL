@@ -78,9 +78,7 @@ public class App {
                     for(String s : resultado) {
                         System.out.println("** " + s);
                     }
-
                 }
-
             }
 
             sc.close();
