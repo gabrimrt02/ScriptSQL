@@ -38,44 +38,43 @@ public class App {
          * el orden correcto
          */
 
-        if (!FilenameUtils.getExtension(args[0]).equals("prop")
-                && !FilenameUtils.getExtension(args[0]).equals("properties")) {
+        if (!FilenameUtils.getExtension(args[0]).equals("sql")) {
 
             System.err.println("El tipo de archivo recibido en el primer parámetro no coincide con le esperado.\n"
-                    + "-- Esperado fichero de propiedades (.prop | .properties) - Rebicibido: ."
+                    + "-- Esperado fichero SQL (.sql) - Rebicibido: ."
                     + FilenameUtils.getExtension(args[0]));
 
             throw new RuntimeException();
 
-        } else if (!FilenameUtils.getExtension(args[1]).equals("sql")) {
+        } else if (!FilenameUtils.getExtension(args[1]).equals("prop")
+                && !FilenameUtils.getExtension(args[1]).equals("properties")) {
 
             System.err.println("El tipo de archivo recibido en el primer parámetro no coincide con le esperado.\n"
-                    + "-- Esperado fichero SQL (.sql) - Rebicibido: ."
+                    + "-- Esperado fichero de propiedades (.prop | .properties) - Rebicibido: ."
                     + FilenameUtils.getExtension(args[1]));
 
             throw new RuntimeException();
-
         }
 
-        propiedadesFile = new File(args[0]);
-        scriptFile = new File(args[1]);
-        
+        propiedadesFile = new File(args[1]);
+        scriptFile = new File(args[0]);
+
         try {
             sc = new Scanner(scriptFile).useDelimiter(";");
             conexion.conectarBD(propiedadesFile);
 
-            while(sc.hasNextLine()) {
+            while (sc.hasNextLine()) {
                 String comando = sc.next();
 
                 System.out.println("Comando: " + comando);
-                
+
                 // conexion.ejecutar(comando);
 
                 if (conexion.ejecutar(comando)) {
-                    
+
                     ArrayList<String> resultado = conexion.getResultado(comando);
 
-                    for(String s : resultado) {
+                    for (String s : resultado) {
                         System.out.println("** " + s);
                     }
                 }
@@ -91,7 +90,6 @@ public class App {
         } catch (ClassNotFoundException | IOException | SQLException e) {
             e.printStackTrace();
         }
-
 
     }
 }
